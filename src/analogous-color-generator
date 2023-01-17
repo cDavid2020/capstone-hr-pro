@@ -1,0 +1,22 @@
+function generateRandomColor() {
+  let letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+function generateAnalogousColors(color) {
+  let hsl = tinycolor(color).toHsl();
+  let colors = [];
+  for (let i = -1; i <= 1; i++) {
+    let newColor = tinycolor({ h: (hsl.h + 30 * i) % 360, s: hsl.s, l: hsl.l });
+    colors.push(newColor.toHexString());
+  }
+  return colors;
+}
+
+let randomColor = generateRandomColor();
+let analogousColors = generateAnalogousColors(randomColor);
+console.log(analogousColors);
